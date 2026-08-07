@@ -33,8 +33,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-## Tailwind
-src/DashboardTheKingThePower/wwwroot/css/app.css
+## Tailwind build output (not used with CDN)
 
 ## OS
 .DS_Store

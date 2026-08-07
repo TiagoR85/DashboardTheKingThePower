@@ -7,10 +7,36 @@
     <title>DashboardTheKingThePower</title>
     <base href="/DashboardTheKingThePower/" />
     <link rel="preload" id="webassembly" />
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="DashboardTheKingThePower.styles.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'oklch(0.55 0.19 160)',
+                        'primary-foreground': 'oklch(1 0 0)',
+                        background: 'oklch(1 0 0)',
+                        foreground: 'oklch(0.145 0 0)',
+                        card: 'oklch(1 0 0)',
+                        'card-foreground': 'oklch(0.145 0 0)',
+                        secondary: 'oklch(0.97 0 0)',
+                        'secondary-foreground': 'oklch(0.205 0 0)',
+                        muted: 'oklch(0.97 0 0)',
+                        'muted-foreground': 'oklch(0.556 0 0)',
+                        border: 'oklch(0.922 0 0)',
+                        input: 'oklch(0.922 0 0)',
+                        ring: 'oklch(0.55 0.19 160)',
+                        sidebar: 'oklch(0.145 0 0)',
+                        'sidebar-foreground': 'oklch(0.985 0 0)',
+                    }
+                }
+            }
+        }
+    </script>
     <script type="importmap"></script>
 </head>
 
