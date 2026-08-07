@@ -26,6 +26,23 @@
     </div>
 </div>
 
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+    <div>
+        <MonthlyGoals />
+    </div>
+    <div>
+        <AppointmentsList />
+    </div>
+    <div>
+        <TransactionsTable />
+    </div>
+</div>
+
+<div class="mt-6">
+    <h3 class="font-semibold mb-4">Quick Actions</h3>
+    <QuickActions />
+</div>
+
 @code {
     private List<Sparkline.SparklineData> tasksSparkline = new()
     {
