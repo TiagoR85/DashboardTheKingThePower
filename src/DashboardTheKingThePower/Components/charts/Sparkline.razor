@@ -1,6 +1,6 @@
 @using ApexCharts
 
-<div class="h-12">
+<div class="h-12 min-h-[48px] w-full">
     <ApexChart TItem="SparklineData" Options="options" Height="48">
         <ApexPointSeries TItem="SparklineData"
                          Items="Data"
@@ -17,11 +17,13 @@
     {
         Chart = new Chart
         {
-            Toolbar = new Toolbar { Show = false }
+            Toolbar = new Toolbar { Show = false },
+            Height = 48
         },
         Stroke = new Stroke { Curve = Curve.Smooth, Width = 2 },
         Colors = new List<string> { "var(--chart-1)" },
-        Grid = new Grid { Show = false }
+        Grid = new Grid { Show = false },
+        Tooltip = new Tooltip { Enabled = false }
     };
 
     public record SparklineData(string Label, decimal Value);
