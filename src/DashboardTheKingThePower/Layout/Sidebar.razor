@@ -1,70 +1,116 @@
 @using DashboardTheKingThePower.Components.theme
 
 <aside class="@SidebarClass">
-    <div class="p-4 border-b border-[var(--sidebar-border)]">
+    <div class="p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-bold">D</span>
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
             </div>
             @if (!IsCollapsed)
             {
-                <span class="font-semibold text-lg whitespace-nowrap">Dashboard</span>
+                <div>
+                    <span class="font-bold text-sm text-[var(--sidebar-foreground)]">Apex</span>
+                    <span class="block text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider">Dashboard</span>
+                </div>
+            }
+        </div>
+        @if (!IsCollapsed)
+        {
+            <button class="p-1 rounded hover:bg-[var(--sidebar-accent)] text-[var(--muted-foreground)]" @onclick="HandleToggle">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+        }
+    </div>
+
+    <nav class="flex-1 px-3 py-2 space-y-4 overflow-y-auto">
+        <div>
+            <p class="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Overview</p>
+            <div class="space-y-1">
+                <a href="/" class="@NavClass(true)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>Dashboard</span> }
+                </a>
+                <a href="/analytics" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>Analytics</span> }
+                </a>
+                <a href="/ecommerce" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>eCommerce</span> }
+                </a>
+                <a href="/crm" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>CRM</span> }
+                </a>
+                <a href="/saas" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>SaaS</span> }
+                </a>
+                <a href="/charts" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>Charts</span> }
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Commerce</p>
+            <div class="space-y-1">
+                <a href="/orders" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    @if (!IsCollapsed)
+                    {
+                        <span>Orders</span>
+                        <span class="ml-auto text-xs bg-[var(--primary)] text-white px-1.5 py-0.5 rounded-full">12</span>
+                    }
+                </a>
+                <a href="/products" class="@NavClass(false)">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                    @if (!IsCollapsed) { <span>Products</span> }
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-3 border-t border-[var(--sidebar-border)]">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xs font-medium">AS</span>
+            </div>
+            @if (!IsCollapsed)
+            {
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-[var(--sidebar-foreground)]">Aigars S.</p>
+                    <p class="text-[10px] text-[var(--muted-foreground)]">Admin</p>
+                </div>
+                <button class="p-1.5 rounded hover:bg-[var(--sidebar-accent)] text-[var(--muted-foreground)]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                </button>
             }
         </div>
     </div>
-
-    <nav class="flex-1 p-2 space-y-1 overflow-y-auto">
-        <a href="/" class="@NavClass(true)">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
-            @if (!IsCollapsed)
-            {
-                <span>Dashboard</span>
-            }
-        </a>
-        <a href="/analytics" class="@NavClass(false)">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-            </svg>
-            @if (!IsCollapsed)
-            {
-                <span>Analytics</span>
-            }
-        </a>
-    </nav>
-
-    @if (!IsCollapsed)
-    {
-        <div class="p-4 border-t border-[var(--sidebar-border)]">
-            <p class="text-xs opacity-60 mb-2">Accent Color</p>
-            <AccentPicker />
-        </div>
-
-        <div class="p-4 border-t border-[var(--sidebar-border)]">
-            <ThemeToggle />
-        </div>
-
-        <div class="p-4 border-t border-[var(--sidebar-border)]">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center flex-shrink-0">
-                    <span class="text-white text-sm font-medium">U</span>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium truncate">User</p>
-                    <p class="text-xs opacity-60 truncate">user&#64;example.com</p>
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="p-2 border-t border-[var(--sidebar-border)] flex flex-col items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center">
-                <span class="text-white text-sm font-medium">U</span>
-            </div>
-        </div>
-    }
 </aside>
 
 @if (IsMobile && !IsCollapsed)
@@ -78,14 +124,19 @@
     [Parameter] public EventCallback OnToggle { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
 
-    private string SidebarClass => $"fixed left-0 top-0 h-screen {(IsCollapsed ? "w-[72px]" : "w-[260px]")} bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50";
+    private string SidebarClass => $"fixed left-0 top-0 h-screen {(IsCollapsed ? "w-[72px]" : "w-[260px]")} bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)]";
 
     private string NavClass(bool isActive)
     {
-        var baseClass = "flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--sidebar-foreground)]";
-        var activeClass = isActive ? "bg-[var(--sidebar-accent)]" : "hover:bg-[var(--sidebar-accent)] opacity-80";
+        var baseClass = "flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--sidebar-foreground)] text-sm";
+        var activeClass = isActive ? "bg-[var(--primary)] text-white" : "hover:bg-[var(--sidebar-accent)]";
         var collapsedClass = IsCollapsed ? "justify-center" : "";
         return $"{baseClass} {activeClass} {collapsedClass}";
+    }
+
+    private async Task HandleToggle()
+    {
+        await OnToggle.InvokeAsync();
     }
 
     private async Task HandleBackdropClick()

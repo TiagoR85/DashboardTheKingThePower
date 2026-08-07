@@ -1,34 +1,72 @@
-<header class="sticky top-0 z-10 h-14 bg-[var(--background)] border-b border-[var(--border)] flex items-center px-6">
-    <button class="p-2 rounded-lg hover:bg-[var(--secondary)]" @onclick="HandleToggleSidebar">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-    </button>
+@inject IJSRuntime JS
 
-    <div class="flex-1 max-w-md mx-4">
+<header class="sticky top-0 z-10 h-16 bg-[var(--background)] border-b border-[var(--border)] flex items-center px-6 gap-4">
+    <div class="flex-1 max-w-xl">
         <div class="relative">
-            <input type="text" placeholder="Search..." class="w-full h-9 pl-9 pr-4 rounded-lg bg-[var(--secondary)] border border-[var(--border)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ring)]">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted-foreground)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
-            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs opacity-50">Ctrl+K</span>
+            <input type="text" placeholder="Search anything..." class="w-full h-10 pl-10 pr-12 rounded-lg bg-[var(--secondary)] border border-[var(--border)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-[var(--muted-foreground)] bg-[var(--background)] border border-[var(--border)] px-1.5 py-0.5 rounded">Ctrl+K</span>
         </div>
     </div>
 
     <div class="flex items-center gap-2">
-        <button class="p-2 rounded-lg hover:bg-[var(--secondary)]">
+        <button class="h-10 px-4 rounded-lg bg-[var(--primary)] text-white text-sm font-medium flex items-center gap-2 hover:opacity-90">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            New Order
+        </button>
+
+        <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]" @onclick="ToggleTheme">
+            @if (_isDark)
+            {
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+            }
+            else
+            {
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            }
+        </button>
+
+        <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+        </button>
+
+        <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)] relative">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-[var(--destructive)] rounded-full"></span>
         </button>
+
+        <div class="w-9 h-9 rounded-full bg-[var(--primary)] flex items-center justify-center cursor-pointer">
+            <span class="text-white text-xs font-medium">AS</span>
+        </div>
     </div>
 </header>
 
 @code {
     [Parameter] public EventCallback OnToggleSidebar { get; set; }
 
-    private async Task HandleToggleSidebar()
+    private bool _isDark;
+
+    protected override async Task OnInitializedAsync()
     {
-        await OnToggleSidebar.InvokeAsync();
+        var theme = await JS.InvokeAsync<string>("getTheme");
+        _isDark = theme == "dark";
+    }
+
+    private async Task ToggleTheme()
+    {
+        await JS.InvokeVoidAsync("toggleTheme");
+        _isDark = !_isDark;
     }
 }
