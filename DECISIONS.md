@@ -4,6 +4,34 @@
 
 ---
 
+## [2026-08-07] — Decisões de Pages & Polish
+
+### Nav Structure
+
+| Decisão | Opção Escolhida | Alternativas | Motivo |
+|---------|-----------------|--------------|--------|
+| Sidebar sections | Overview, Apps, Commerce | Flat list | Melhor organização por tipo de funcionalidade |
+| Active nav | NavigationManager + StartsWith | Hardcoded bool | Detecta URL automaticamente, funciona com rotas aninhadas |
+| Dead links | Remover em vez de placeholder | Manter com 404 | Melhor UX, menos confusão |
+
+### Calendar Implementation
+
+| Decisão | Opço Escolhida | Alternativas | Motivo |
+|---------|-----------------|--------------|--------|
+| Views | Monthly/Weekly/Daily | Somente monthly | Match com Apex demo |
+| Event storage | In-memory List | localStorage | Simples para MVP, pode migrar depois |
+| Time inputs | String + OnChange | TimeOnly | Compatibilidade Blazor WASM |
+
+### Kanban Implementation
+
+| Decisão | Opção Escolhida | Alternativas | Motivo |
+|---------|-----------------|--------------|--------|
+| Columns | 4 fixas (To Do, In Progress, Review, Done) | Dinâmicas | Match com Apex demo |
+| Drag-and-drop | Placeholder (sem BlazorSortable) | Instalar agora | Priorizar páginas, DnD é polish |
+| Task IDs | Auto-increment (TASK-001) | UUID | Simples, legível |
+
+---
+
 ## [2026-08-06] — Decisões Iniciais
 
 ### Tech Stack

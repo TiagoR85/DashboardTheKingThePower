@@ -1,62 +1,80 @@
-# Status do Projeto — 2026-08-06 (v0.2)
+# Status do Projeto — 2026-08-07 (v0.4)
 
 > Este arquivo é o **snapshot atual**. Atualize ao finalizar cada tarefa significativa.
 
 ## Estado Atual
 
-- **DashboardTheKingThePower**: **PHASE 1+2 CONCLUÍDO** — Clone pixel-perfect do Apex Blazor Dashboard
+- **DashboardTheKingThePower**: **PHASE 1+3 CONCLUÍDO** — Clone pixel-perfect do Apex Blazor Dashboard
 - **Repo**: https://github.com/TiagoR85/DashboardTheKingThePower (privado)
+- **Deploy**: https://tiagoR85.github.io/DashboardTheKingThePower/
 - **Spec**: `../AssistentePessoal/docs/superpowers/specs/2026-08-06-apex-blazor-clone-design.md`
 - **DESIGN.md**: Criado conforme skill frontend-design-deslop
-- **Plano de Implementação**: `docs/superpowers/plans/2026-08-06-phase1-phase2-implementation.md`
 
-## Verificação de Saúde (2026-08-06)
+## Verificação de Saúde (2026-08-07)
 
 | Item | Status |
 |------|--------|
 | Spec | ✅ Criado e aprovado |
 | DESIGN.md | ✅ Criado conforme frontend-design-deslop |
-| Plano de Implementação | ✅ Criado com 15 tasks |
-| Skills de Frontend | ✅ Adicionadas ao index.yml |
-| Projeto | ⏳ Aguardando criação (Task 0) |
-| Build | ⏳ Pendente |
-| Testes | ⏳ Pendente |
+| Build | ✅ Passa com 0 erros |
+| Deploy | ✅ GitHub Pages ativo |
+| Testes E2E | ✅ 7 testes Playwright |
+| Docs | ✅ Atualizado |
+
+## Páginas Implementadas
+
+| Página | Rota | Status |
+|--------|------|--------|
+| Dashboard Home | `/` | ✅ Completa |
+| Analytics | `/analytics` | ✅ Completa |
+| Calendar | `/calendar` | ✅ Completa |
+| Kanban | `/kanban` | ✅ Completa |
+| Orders | `/orders` | ⏳ Placeholder |
+| Products | `/products` | ⏳ Placeholder |
 
 ## O Que Está Pronto
 
-- [x] Spec completo do projeto
-- [x] Estratégia de context handoff
-- [x] Fases de implementação definidas
-- [x] DESIGN.md com design system completo
-- [x] Plano de implementação com 15 tasks
-- [x] Skills de frontend referenciadas no superpowers
-- [x] Repositório criado no GitHub
-- [x] Projeto Blazor WebAssembly scaffolded
-- [x] Tailwind CSS v4 configurado com OKLCh tokens
-- [x] Layout base (sidebar, header, content)
+- [x] Repositório GitHub privado
+- [x] Blazor WebAssembly (.NET 10)
+- [x] Tailwind CSS v4 com OKLCh tokens
+- [x] Layout responsivo (sidebar, header, bottom nav mobile)
 - [x] Theme system (dark/light toggle)
 - [x] Accent color presets (6 cores)
 - [x] Command palette (Ctrl+K)
-- [x] UI components base (Button, Card, Badge)
-- [x] KPI cards com sparklines
-- [x] Area chart com gradient
-- [x] Donut chart
-- [x] Dashboard sections (MonthlyGoals, AppointmentsList, TransactionsTable, QuickActions)
+- [x] UI components (Button, Card, Badge, Modal)
+- [x] Dashboard Home (KPIs, charts, tables)
+- [x] Analytics (revenue, traffic, conversion funnel)
+- [x] Calendar (monthly/weekly/daily views, event CRUD)
+- [x] Kanban (columns, task CRUD)
+- [x] Sidebar com nav ativo highlighting
+- [x] Deploy GitHub Pages
+- [x] E2E tests Playwright
+- [x] Collapsible sidebar
+- [x] Mobile responsive (bottom nav)
+- [x] Inter font
 
 ## O Que NÃO Está Pronto
 
-- [ ] E2E tests (Task 12)
-- [ ] Deploy GitHub Pages (Task 14)
+- [ ] eCommerce page (placeholder)
+- [ ] CRM page (placeholder)
+- [ ] SaaS page (placeholder)
+- [ ] Charts page (placeholder)
+- [ ] Drag-and-drop no Kanban
+- [ ] Sparkline scroll errors (mobile)
 
 ## Bloqueios Atuais
 
-Nenhum bloqueio técnico. Projeto pronto para implementação.
+Nenhum bloqueio técnico.
 
 ## Próximos Passos
 
-1. Executar Task 0: Criar repositório GitHub
-2. Executar Tasks 1-14 conforme plano
-3. Deploy no GitHub Pages
+1. Implementar eCommerce page (produtos, carrinho, checkout)
+2. Implementar CRM page (contatos, pipeline, atividades)
+3. Implementar SaaS page (métricas, usage, billing)
+4. Implementar Charts page (biblioteca de gráficos)
+5. Adicionar drag-and-drop no Kanban (BlazorSortable)
+6. Refinar mobile responsive
+7. Adicionar mais animações e transições
 
 ## Referências Rápidas
 
@@ -66,6 +84,4 @@ Nenhum bloqueio técnico. Projeto pronto para implementação.
 | DESIGN.md | `DESIGN.md` |
 | Plano de Implementação | `docs/superpowers/plans/2026-08-06-phase1-phase2-implementation.md` |
 | Apex Demo | https://demo.dashboardpack.com/apex-blazor/ |
-| Tailwind CSS v4 | https://tailwindcss.com/ |
-| Blazor-ApexCharts | https://github.com/apexcharts/Blazor-ApexCharts |
-| GitHub Pages | https://pages.github.com/ |
+| Deploy | https://tiagoR85.github.io/DashboardTheKingThePower/ |

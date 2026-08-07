@@ -5,6 +5,27 @@
 
 ---
 
+## [2026-08-07] — v0.4 Pages & Polish
+
+### Adicionado
+- **Analytics Page** — Revenue charts (bar), traffic sources (donut), user activity (line), conversion funnel
+- **Calendar Page** — Monthly/weekly/daily views, event CRUD modal, color-coded events
+- **Kanban Board** — Columns (To Do, In Progress, Review, Done), task CRUD, priority badges, assignee avatars
+- **Orders Page** — Placeholder page
+- **Products Page** — Placeholder page
+- **Active Nav Highlighting** — Sidebar uses NavigationManager to highlight current page
+- **Sidebar Restructure** — Sections: Overview (Dashboard, Analytics), Apps (Calendar, Kanban), Commerce (Orders, Products)
+
+### Modificado
+- **Sidebar** — Removed dead links (eCommerce, CRM, SaaS, Charts), added Calendar and Kanban
+- **Commerce section** — Always visible (even when collapsed)
+
+### Removido
+- **Counter.razor** — Unused Blazor default page
+- **Weather.razor** — Unused Blazor default page
+
+---
+
 ## [2026-08-06] — v0.3 Phase 1+2 Concluído
 
 ### Adicionado
@@ -20,6 +41,11 @@
 - **Area Chart** — Com gradient e tabs (Monthly/Weekly/Daily)
 - **Donut Chart** — Top Services
 - **Dashboard Sections** — MonthlyGoals, AppointmentsList, TransactionsTable, QuickActions
+- **Deploy** — GitHub Pages via GitHub Actions
+- **E2E Tests** — Playwright NUnit (7 testes)
+- **Collapsible Sidebar** — 260px ↔ 72px com animação
+- **Mobile Responsive** — Bottom nav bar, overlay sidebar
+- **Inter Font** — Google Fonts
 
 ## [2026-08-06] — v0.2 Planejamento Concluído
 
