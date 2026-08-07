@@ -5,7 +5,21 @@
 
 ---
 
-## [2026-08-07] — v0.4 Pages & Polish
+## [2026-08-07] — v0.5 All Pages Complete
+
+### Adicionado
+- **eCommerce Page** — Product grid, category filters, shopping cart modal, sort options, discount badges
+- **CRM Page** — Contacts table with CRUD, sales pipeline board with deal stages, KPI cards
+- **Charts Page** — Line, Area, Bar, Donut, Mixed, Radar, Pie, Radial Bar, Heatmap charts
+- **SaaS Page** — MRR metrics, subscription plans, feature usage, revenue growth chart, recent signups
+- **Sidebar Navigation** — Restructured with 4 sections (Overview, Apps, Commerce, Business)
+- **eCommerce Nav Link** — Added to Commerce section
+
+### Modificado
+- **Sidebar** — Added Charts, eCommerce, CRM, SaaS links
+- **Build fixes** — Fixed Razor syntax errors (Aggregate, char literals, FillType enum)
+
+## [2026-08-07] — v0.4 SPA Routing Fix
 
 ### Adicionado
 - **Analytics Page** — Revenue charts (bar), traffic sources (donut), user activity (line), conversion funnel
