@@ -34,11 +34,29 @@
             }
         </button>
 
-        <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-            </svg>
-        </button>
+        <div class="relative">
+            <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]" @onclick="ToggleAccentPicker">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                </svg>
+            </button>
+            @if (_showAccentPicker)
+            {
+                <div class="absolute right-0 top-full mt-2 p-3 bg-[var(--popover)] border border-[var(--border)] rounded-lg shadow-lg z-50">
+                    <p class="text-xs text-[var(--muted-foreground)] mb-2">Accent Color</p>
+                    <div class="flex gap-2">
+                        @foreach (var accent in _accents)
+                        {
+                            <button
+                                @onclick="() => SetAccent(accent.Key)"
+                                class="w-6 h-6 rounded-full border-2 @(_currentAccent == accent.Key ? "border-white ring-2 ring-[var(--ring)]" : "border-transparent")"
+                                style="background-color: @accent.Value">
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
 
         <button class="p-2 rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)] relative">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,16 +75,41 @@
     [Parameter] public EventCallback OnToggleSidebar { get; set; }
 
     private bool _isDark;
+    private bool _showAccentPicker;
+    private string _currentAccent = "emerald";
+
+    private Dictionary<string, string> _accents = new()
+    {
+        ["emerald"] = "oklch(0.55 0.19 160)",
+        ["blue"] = "oklch(0.55 0.19 240)",
+        ["violet"] = "oklch(0.55 0.19 280)",
+        ["rose"] = "oklch(0.55 0.19 350)",
+        ["orange"] = "oklch(0.55 0.19 50)",
+        ["slate"] = "oklch(0.55 0.02 260)"
+    };
 
     protected override async Task OnInitializedAsync()
     {
         var theme = await JS.InvokeAsync<string>("getTheme");
         _isDark = theme == "dark";
+        _currentAccent = await JS.InvokeAsync<string>("getAccent");
     }
 
     private async Task ToggleTheme()
     {
-        await JS.InvokeVoidAsync("toggleTheme");
-        _isDark = !_isDark;
+        var theme = await JS.InvokeAsync<string>("toggleTheme");
+        _isDark = theme == "dark";
+    }
+
+    private void ToggleAccentPicker()
+    {
+        _showAccentPicker = !_showAccentPicker;
+    }
+
+    private async Task SetAccent(string accent)
+    {
+        await JS.InvokeVoidAsync("setAccent", accent);
+        _currentAccent = accent;
+        _showAccentPicker = false;
     }
 }
