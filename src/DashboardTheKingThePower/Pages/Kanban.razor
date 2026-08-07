@@ -35,7 +35,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
                                     <div class="w-6 h-6 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-xs">
-                                        @card.Assignee.Split(' ').Select(n => n[0]).Aggregate("", (a, b) => a + b)
+                                        @string.Concat(card.Assignee.Split(' ').Select(n => n[0].ToString()))
                                     </div>
                                     <span class="text-xs text-[var(--muted-foreground)]">@card.Assignee</span>
                                 </div>
