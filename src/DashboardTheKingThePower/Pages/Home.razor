@@ -17,8 +17,13 @@
     </KpiCard>
 </div>
 
-<div class="mt-6">
-    <AreaChart />
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+    <div class="lg:col-span-2">
+        <AreaChart />
+    </div>
+    <div>
+        <DonutChart />
+    </div>
 </div>
 
 @code {
