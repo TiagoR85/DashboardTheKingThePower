@@ -1,0 +1,28 @@
+@using ApexCharts
+
+<div class="h-12">
+    <ApexChart TItem="SparklineData" Options="options" Height="48">
+        <ApexPointSeries TItem="SparklineData"
+                         Items="Data"
+                         SeriesType="SeriesType.Line"
+                         XValue="e => e.Label"
+                         YValue="e => e.Value" />
+    </ApexChart>
+</div>
+
+@code {
+    [Parameter] public List<SparklineData> Data { get; set; } = new();
+    
+    private ApexChartOptions<SparklineData> options = new()
+    {
+        Chart = new Chart
+        {
+            Toolbar = new Toolbar { Show = false }
+        },
+        Stroke = new Stroke { Curve = Curve.Smooth, Width = 2 },
+        Colors = new List<string> { "oklch(0.55 0.19 160)" },
+        Grid = new Grid { Show = false }
+    };
+    
+    public record SparklineData(string Label, decimal Value);
+}
