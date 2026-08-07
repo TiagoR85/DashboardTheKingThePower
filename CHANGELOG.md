@@ -5,6 +5,22 @@
 
 ---
 
+## [2026-08-06] — v0.3 Phase 1+2 Concluído
+
+### Adicionado
+- **Repositório GitHub** — Criado e configurado
+- **Blazor WebAssembly** — Projeto scaffolded com .NET 10
+- **Tailwind CSS v4** — Configurado com OKLCh tokens
+- **Layout** — Sidebar (260px collapsible), Header (56px sticky), Content (max-width 1400px)
+- **Theme System** — Dark/Light toggle com persistência localStorage
+- **Accent Colors** — 6 presets (emerald, blue, violet, rose, orange, slate)
+- **Command Palette** — Ctrl+K shortcut
+- **UI Components** — Button, Card, Badge, Modal
+- **KPI Cards** — 4 cards com sparklines
+- **Area Chart** — Com gradient e tabs (Monthly/Weekly/Daily)
+- **Donut Chart** — Top Services
+- **Dashboard Sections** — MonthlyGoals, AppointmentsList, TransactionsTable, QuickActions
+
 ## [2026-08-06] — v0.2 Planejamento Concluído
 
 ### Adicionado

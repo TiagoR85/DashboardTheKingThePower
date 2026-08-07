@@ -4,8 +4,8 @@
 
 ## Estado Atual
 
-- **DashboardTheKingThePower**: **PLANEJAMENTO CONCLUÍDO** — Clone pixel-perfect do Apex Blazor Dashboard
-- **Repo**: Privado no GitHub (a ser criado na Task 0)
+- **DashboardTheKingThePower**: **PHASE 1+2 CONCLUÍDO** — Clone pixel-perfect do Apex Blazor Dashboard
+- **Repo**: https://github.com/TiagoR85/DashboardTheKingThePower (privado)
 - **Spec**: `../AssistentePessoal/docs/superpowers/specs/2026-08-06-apex-blazor-clone-design.md`
 - **DESIGN.md**: Criado conforme skill frontend-design-deslop
 - **Plano de Implementação**: `docs/superpowers/plans/2026-08-06-phase1-phase2-implementation.md`
@@ -30,21 +30,21 @@
 - [x] DESIGN.md com design system completo
 - [x] Plano de implementação com 15 tasks
 - [x] Skills de frontend referenciadas no superpowers
+- [x] Repositório criado no GitHub
+- [x] Projeto Blazor WebAssembly scaffolded
+- [x] Tailwind CSS v4 configurado com OKLCh tokens
+- [x] Layout base (sidebar, header, content)
+- [x] Theme system (dark/light toggle)
+- [x] Accent color presets (6 cores)
+- [x] Command palette (Ctrl+K)
+- [x] UI components base (Button, Card, Badge)
+- [x] KPI cards com sparklines
+- [x] Area chart com gradient
+- [x] Donut chart
+- [x] Dashboard sections (MonthlyGoals, AppointmentsList, TransactionsTable, QuickActions)
 
 ## O Que NÃO Está Pronto
 
-- [ ] Repositório criado no GitHub (Task 0)
-- [ ] Projeto Blazor WebAssembly scaffolded (Task 1)
-- [ ] Tailwind CSS v4 configurado (Task 2)
-- [ ] Layout base (sidebar, header, content) (Task 3)
-- [ ] Theme system (dark/light) (Task 4)
-- [ ] Accent color presets (Task 5)
-- [ ] Command palette (Ctrl+K) (Task 6)
-- [ ] UI components base (Task 7)
-- [ ] KPI cards com sparklines (Task 8)
-- [ ] Area chart (Task 9)
-- [ ] Donut chart (Task 10)
-- [ ] Dashboard sections (Task 11)
 - [ ] E2E tests (Task 12)
 - [ ] Deploy GitHub Pages (Task 14)
 
