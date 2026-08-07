@@ -133,7 +133,21 @@
     [Parameter] public EventCallback OnToggle { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
 
-    private string SidebarClass => $"fixed left-0 top-0 h-screen {(IsCollapsed ? "w-[72px]" : "w-[260px]")} bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)]";
+    private string SidebarClass
+    {
+        get
+        {
+            if (IsMobile)
+            {
+                return IsCollapsed
+                    ? "fixed left-0 top-0 h-screen w-[260px] bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)] -translate-x-full"
+                    : "fixed left-0 top-0 h-screen w-[260px] bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)]";
+            }
+            return IsCollapsed
+                ? "fixed left-0 top-0 h-screen w-[72px] bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)]"
+                : "fixed left-0 top-0 h-screen w-[260px] bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300 z-50 border-r border-[var(--sidebar-border)]";
+        }
+    }
 
     private string NavClass(bool isActive)
     {
