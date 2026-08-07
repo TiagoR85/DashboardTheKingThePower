@@ -1,0 +1,113 @@
+@page "/invoices"
+@using DashboardTheKingThePower.Components.ui
+
+<PageTitle>Invoices</PageTitle>
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Invoices</h1>
+    <Button OnClick="ShowCreateModal">+ New Invoice</Button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+    <Card>
+        <div class="p-4">
+            <p class="text-sm text-[var(--muted-foreground)]">Total Invoiced</p>
+            <p class="text-2xl font-bold mt-1">$48,295</p>
+        </div>
+    </Card>
+    <Card>
+        <div class="p-4">
+            <p class="text-sm text-[var(--muted-foreground)]">Paid</p>
+            <p class="text-2xl font-bold mt-1 text-green-500">$35,420</p>
+        </div>
+    </Card>
+    <Card>
+        <div class="p-4">
+            <p class="text-sm text-[var(--muted-foreground)]">Pending</p>
+            <p class="text-2xl font-bold mt-1 text-yellow-500">$8,875</p>
+        </div>
+    </Card>
+    <Card>
+        <div class="p-4">
+            <p class="text-sm text-[var(--muted-foreground)]">Overdue</p>
+            <p class="text-2xl font-bold mt-1 text-red-500">$4,000</p>
+        </div>
+    </Card>
+</div>
+
+<Card>
+    <div class="p-4 border-b border-[var(--border)] flex items-center gap-4">
+        <input class="flex-1 px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)] text-sm" placeholder="Search invoices..." @bind="searchTerm" />
+        <select class="px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)] text-sm" @bind="filterStatus">
+            <option value="all">All Status</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="overdue">Overdue</option>
+        </select>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-[var(--border)]">
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Invoice</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Client</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Date</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Due Date</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Amount</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Status</th>
+                    <th class="text-left p-4 text-sm font-medium text-[var(--muted-foreground)]">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var invoice in filteredInvoices)
+                {
+                    <tr class="border-b border-[var(--border)] hover:bg-[var(--muted)]">
+                        <td class="p-4 font-medium">@invoice.Id</td>
+                        <td class="p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs" style="background-color: @invoice.Color">
+                                    @invoice.Client.Split(' ').Select(n => n[0].ToString()).Aggregate("", (a, b) => a + b)
+                                </div>
+                                <span>@invoice.Client</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-sm text-[var(--muted-foreground)]">@invoice.Date</td>
+                        <td class="p-4 text-sm text-[var(--muted-foreground)]">@invoice.DueDate</td>
+                        <td class="p-4 font-medium">$@invoice.Amount.ToString("N0")</td>
+                        <td class="p-4">
+                            <span class="text-xs px-2 py-1 rounded-full" style="background-color: @invoice.StatusColor; color: white;">@invoice.Status</span>
+                        </td>
+                        <td class="p-4">
+                            <button class="text-[var(--muted-foreground)] hover:text-[var(--foreground)] mr-2">View</button>
+                            <button class="text-[var(--muted-foreground)] hover:text-[var(--foreground)]">Edit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</Card>
+
+@code {
+    private string searchTerm = "";
+    private string filterStatus = "all";
+
+    private List<Invoice> invoices = new()
+    {
+        new("INV-001", "Acme Corp", "2026-08-01", "2026-08-15", 5000, "Paid", "#10b981", "#3b82f6"),
+        new("INV-002", "TechStart", "2026-08-03", "2026-08-17", 2500, "Pending", "#f59e0b", "#10b981"),
+        new("INV-003", "Global Inc", "2026-08-05", "2026-08-19", 8000, "Paid", "#10b981", "#f59e0b"),
+        new("INV-004", "Creative Co", "2026-07-20", "2026-08-03", 3500, "Overdue", "#ef4444", "#8b5cf6"),
+        new("INV-005", "Future Labs", "2026-08-07", "2026-08-21", 1200, "Pending", "#f59e0b", "#ec4899"),
+        new("INV-006", "Acme Corp", "2026-07-15", "2026-07-29", 4200, "Paid", "#10b981", "#3b82f6"),
+        new("INV-007", "TechStart", "2026-08-10", "2026-08-24", 6800, "Pending", "#f59e0b", "#10b981")
+    };
+
+    private IEnumerable<Invoice> filteredInvoices => invoices
+        .Where(i => (filterStatus == "all" || i.Status.ToLower() == filterStatus) &&
+                     (string.IsNullOrEmpty(searchTerm) || i.Client.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || i.Id.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
+
+    private void ShowCreateModal() { }
+
+    public record Invoice(string Id, string Client, string Date, string DueDate, decimal Amount, string Status, string StatusColor, string Color);
+}

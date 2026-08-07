@@ -1,0 +1,189 @@
+@page "/settings"
+@using DashboardTheKingThePower.Components.ui
+@using DashboardTheKingThePower.Components.theme
+
+<PageTitle>Settings</PageTitle>
+
+<h1 class="text-2xl font-bold mb-6">Settings</h1>
+
+<div class="flex gap-2 mb-6">
+    <button class="px-4 py-2 text-sm rounded-lg @(activeTab == "profile" ? "bg-[var(--primary)] text-white" : "border border-[var(--border)] hover:bg-[var(--secondary)]")" @onclick="SetProfileTab">Profile</button>
+    <button class="px-4 py-2 text-sm rounded-lg @(activeTab == "notifications" ? "bg-[var(--primary)] text-white" : "border border-[var(--border)] hover:bg-[var(--secondary)]")" @onclick="SetNotificationsTab">Notifications</button>
+    <button class="px-4 py-2 text-sm rounded-lg @(activeTab == "security" ? "bg-[var(--primary)] text-white" : "border border-[var(--border)] hover:bg-[var(--secondary)]")" @onclick="SetSecurityTab">Security</button>
+    <button class="px-4 py-2 text-sm rounded-lg @(activeTab == "appearance" ? "bg-[var(--primary)] text-white" : "border border-[var(--border)] hover:bg-[var(--secondary)]")" @onclick="SetAppearanceTab">Appearance</button>
+</div>
+
+@if (activeTab == "profile")
+{
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card>
+            <div class="p-6 text-center">
+                <div class="w-24 h-24 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-3xl font-bold mx-auto mb-4">
+                    AS
+                </div>
+                <h3 class="font-semibold text-lg">Aigars S.</h3>
+                <p class="text-[var(--muted-foreground)]">Admin</p>
+                <button class="mt-4 px-4 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-[var(--muted)]">Change Avatar</button>
+            </div>
+        </Card>
+        <div class="lg:col-span-2">
+            <Card>
+                <div class="p-6">
+                    <h3 class="font-semibold mb-4">Personal Information</h3>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">First name</label>
+                                <input class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" value="Aigars" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Last name</label>
+                                <input class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" value="S." />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Email</label>
+                            <input type="email" class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" value="aigars@example.com" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Bio</label>
+                            <textarea class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)] h-20">Admin at Dashboard The King The Power</textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button class="px-4 py-2 bg-[var(--primary)] text-white text-sm rounded-lg hover:opacity-90">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </Card>
+        </div>
+    </div>
+}
+else if (activeTab == "notifications")
+{
+    <Card>
+        <div class="p-6">
+            <h3 class="font-semibold mb-4">Notification Preferences</h3>
+            <div class="space-y-6">
+                @foreach (var setting in notificationSettings)
+                {
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-medium">@setting.Name</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">@setting.Description</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked="@setting.Enabled" class="sr-only peer" />
+                            <div class="w-11 h-6 bg-[var(--muted)] peer-focus:ring-2 peer-focus:ring-[var(--primary)] rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--primary)]"></div>
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </Card>
+}
+else if (activeTab == "security")
+{
+    <div class="space-y-6">
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Change Password</h3>
+                <div class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Current password</label>
+                        <input type="password" class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">New password</label>
+                        <input type="password" class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Confirm new password</label>
+                        <input type="password" class="w-full px-3 py-2 border border-[var(--border)] rounded-lg bg-[var(--background)]" />
+                    </div>
+                    <button class="px-4 py-2 bg-[var(--primary)] text-white text-sm rounded-lg hover:opacity-90">Update Password</button>
+                </div>
+            </div>
+        </Card>
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Two-Factor Authentication</h3>
+                <p class="text-[var(--muted-foreground)] mb-4">Add an extra layer of security to your account.</p>
+                <button class="px-4 py-2 border border-[var(--border)] text-sm rounded-lg hover:bg-[var(--muted)]">Enable 2FA</button>
+            </div>
+        </Card>
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Active Sessions</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 border border-[var(--border)] rounded-lg">
+                        <div>
+                            <p class="font-medium">Chrome on Windows</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">Last active: 2 minutes ago</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">Current</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border border-[var(--border)] rounded-lg">
+                        <div>
+                            <p class="font-medium">Safari on iPhone</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">Last active: 3 hours ago</p>
+                        </div>
+                        <button class="text-xs text-red-500 hover:text-red-600">Revoke</button>
+                    </div>
+                </div>
+            </div>
+        </Card>
+    </div>
+}
+else if (activeTab == "appearance")
+{
+    <div class="space-y-6">
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Theme</h3>
+                <div class="flex gap-4">
+                    <ThemeToggle />
+                </div>
+            </div>
+        </Card>
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Accent Color</h3>
+                <AccentPicker />
+            </div>
+        </Card>
+        <Card>
+            <div class="p-6">
+                <h3 class="font-semibold mb-4">Sidebar</h3>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-medium">Collapsed by default</p>
+                        <p class="text-sm text-[var(--muted-foreground)]">Start with sidebar collapsed</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" />
+                        <div class="w-11 h-6 bg-[var(--muted)] peer-focus:ring-2 peer-focus:ring-[var(--primary)] rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--primary)]"></div>
+                    </label>
+                </div>
+            </div>
+        </Card>
+    </div>
+}
+
+@code {
+    private string activeTab = "profile";
+
+    private List<NotificationSetting> notificationSettings = new()
+    {
+        new("Email notifications", "Receive email for new messages", true),
+        new("Push notifications", "Receive push notifications", true),
+        new("Weekly digest", "Receive weekly summary email", false),
+        new("Marketing emails", "Receive product updates", false)
+    };
+
+    private void SetProfileTab() { activeTab = "profile"; }
+    private void SetNotificationsTab() { activeTab = "notifications"; }
+    private void SetSecurityTab() { activeTab = "security"; }
+    private void SetAppearanceTab() { activeTab = "appearance"; }
+
+    public record NotificationSetting(string Name, string Description, bool Enabled);
+}
