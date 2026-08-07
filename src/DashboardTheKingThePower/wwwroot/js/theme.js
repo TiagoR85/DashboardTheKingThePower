@@ -4,12 +4,20 @@ function getTheme() {
 
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
 }
 
 function initTheme() {
     const theme = getTheme();
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
     return theme;
 }
 
