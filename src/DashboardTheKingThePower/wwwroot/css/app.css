@@ -7,3 +7,11 @@ body {
     background-color: var(--background);
     color: var(--foreground);
 }
+
+.apexcharts-canvas {
+    min-height: 48px !important;
+}
+
+.apexcharts-canvas svg {
+    min-height: 48px !important;
+}
