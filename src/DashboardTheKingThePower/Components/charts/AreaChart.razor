@@ -1,0 +1,63 @@
+@using ApexCharts
+@using DashboardTheKingThePower.Components.ui
+
+<div class="rounded-xl border border-[var(--border)] bg-[var(--card)] text-[var(--card-foreground)]">
+    <div class="px-6 py-4 border-b border-[var(--border)]">
+        <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Overview</h3>
+            <div class="flex gap-2">
+                <button class="px-3 py-1 text-sm rounded-lg @(activeTab == "monthly" ? "bg-[var(--primary)] text-white" : "hover:bg-[var(--secondary)]")" @onclick="SetTabMonthly">Monthly</button>
+                <button class="px-3 py-1 text-sm rounded-lg @(activeTab == "weekly" ? "bg-[var(--primary)] text-white" : "hover:bg-[var(--secondary)]")" @onclick="SetTabWeekly">Weekly</button>
+                <button class="px-3 py-1 text-sm rounded-lg @(activeTab == "daily" ? "bg-[var(--primary)] text-white" : "hover:bg-[var(--secondary)]")" @onclick="SetTabDaily">Daily</button>
+            </div>
+        </div>
+    </div>
+    <div class="p-6">
+        <ApexChart TItem="ChartData" Options="options" Height="350">
+            <ApexPointSeries TItem="ChartData"
+                             Items="data"
+                             Name="This Month"
+                             SeriesType="SeriesType.Area"
+                             XValue="e => e.X"
+                             YValue="e => e.Y" />
+            <ApexPointSeries TItem="ChartData"
+                             Items="lastMonthData"
+                             Name="Last Month"
+                             SeriesType="SeriesType.Area"
+                             XValue="e => e.X"
+                             YValue="e => e.Y" />
+        </ApexChart>
+    </div>
+</div>
+
+@code {
+    private string activeTab = "monthly";
+    
+    private List<ChartData> data = new()
+    {
+        new("Jan", 30), new("Feb", 40), new("Mar", 35),
+        new("Apr", 50), new("May", 49), new("Jun", 60),
+        new("Jul", 70), new("Aug", 91), new("Sep", 125)
+    };
+    
+    private List<ChartData> lastMonthData = new()
+    {
+        new("Jan", 20), new("Feb", 30), new("Mar", 25),
+        new("Apr", 40), new("May", 39), new("Jun", 50),
+        new("Jul", 60), new("Aug", 81), new("Sep", 115)
+    };
+    
+    private ApexChartOptions<ChartData> options = new()
+    {
+        Chart = new Chart { Toolbar = new Toolbar { Show = false } },
+        Stroke = new Stroke { Curve = Curve.Smooth, Width = 2 },
+        Colors = new List<string> { "oklch(0.55 0.19 160)", "oklch(0.556 0 0)" },
+        Fill = new Fill { Type = FillType.Gradient }
+    };
+    
+    private void SetTabMonthly() { activeTab = "monthly"; }
+    private void SetTabWeekly() { activeTab = "weekly"; }
+    private void SetTabDaily() { activeTab = "daily"; }
+    
+    public record ChartData(string X, decimal Y);
+}
