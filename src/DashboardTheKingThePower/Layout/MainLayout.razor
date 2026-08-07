@@ -5,19 +5,33 @@
 @implements IDisposable
 
 <div class="min-h-screen bg-[var(--background)]">
-    <Sidebar IsCollapsed="@_isCollapsed" IsMobile="@_isMobile" OnToggle="ToggleSidebar" OnClose="CloseSidebar" />
+    @if (!_isMobile)
+    {
+        <Sidebar IsCollapsed="@_isCollapsed" IsMobile="@_isMobile" OnToggle="ToggleSidebar" OnClose="CloseSidebar" />
+    }
     <div class="@ContentClass">
-        <Header />
-        <main class="p-6 max-w-[1400px] mx-auto">
+        <Header OnToggleSidebar="ToggleSidebar" />
+        <main class="p-4 md:p-6 max-w-[1400px] mx-auto pb-20 md:pb-6">
             @Body
         </main>
     </div>
+    @if (_isMobile)
+    {
+        <BottomNav OnMenuClick="ToggleMobileSidebar" />
+    }
     <CommandPalette />
 </div>
+
+@if (_isMobile && _showMobileSidebar)
+{
+    <div class="fixed inset-0 bg-black/50 z-40" @onclick="CloseMobileSidebar"></div>
+    <Sidebar IsCollapsed="false" IsMobile="true" OnToggle="CloseMobileSidebar" OnClose="CloseMobileSidebar" />
+}
 
 @code {
     private bool _isCollapsed;
     private bool _isMobile;
+    private bool _showMobileSidebar;
     private DotNetObjectReference<MainLayout>? _dotNetRef;
 
     private string ContentClass => _isMobile ? "transition-all duration-300" : $"ml-{(_isCollapsed ? "[72px]" : "[260px]")} transition-all duration-300";
@@ -36,11 +50,21 @@
         await JS.InvokeVoidAsync("setSidebarCollapsed", _isCollapsed);
     }
 
+    private void ToggleMobileSidebar()
+    {
+        _showMobileSidebar = !_showMobileSidebar;
+    }
+
+    private void CloseMobileSidebar()
+    {
+        _showMobileSidebar = false;
+    }
+
     private void CloseSidebar()
     {
         if (_isMobile)
         {
-            _isCollapsed = true;
+            _showMobileSidebar = false;
         }
     }
 
@@ -48,6 +72,7 @@
     public async Task OnResize(bool isMobile)
     {
         _isMobile = isMobile;
+        _showMobileSidebar = false;
         StateHasChanged();
     }
 
