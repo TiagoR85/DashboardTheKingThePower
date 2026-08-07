@@ -29,7 +29,7 @@ function toggleTheme() {
 }
 
 function getAccent() {
-    return localStorage.getItem('accent') || 'emerald';
+    return localStorage.getItem('accent') || 'blue';
 }
 
 function setAccent(accent) {
