@@ -1,0 +1,70 @@
+@inject IJSRuntime JS
+
+<Modal IsOpen="isOpen" OnClose="Close">
+    <div class="p-4">
+        <input 
+            @ref="searchInput"
+            type="text" 
+            placeholder="Search pages, actions, settings..." 
+            class="w-full h-10 px-4 rounded-lg bg-[var(--secondary)] border border-[var(--border)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+            @oninput="OnSearch">
+        
+        <div class="mt-4 space-y-1">
+            @foreach (var item in filteredItems)
+            {
+                <button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[var(--secondary)] text-left">
+                    @item.Icon
+                    <span>@item.Label</span>
+                </button>
+            }
+        </div>
+    </div>
+</Modal>
+
+@code {
+    private bool isOpen = false;
+    private ElementReference searchInput;
+    private string searchTerm = "";
+    
+    private List<CommandItem> items = new()
+    {
+        new("Dashboard", "/", "🏠"),
+        new("Analytics", "/analytics", "📊"),
+        new("Toggle Theme", "theme", "🌓"),
+        new("Accent: Emerald", "accent:emerald", "🟢"),
+        new("Accent: Blue", "accent:blue", "🔵"),
+        new("Accent: Violet", "accent:violet", "🟣"),
+        new("Accent: Rose", "accent:rose", "🔴"),
+        new("Accent: Orange", "accent:orange", "🟠"),
+        new("Accent: Slate", "accent:slate", "⚪")
+    };
+    
+    private List<CommandItem> filteredItems => items
+        .Where(i => string.IsNullOrEmpty(searchTerm) || i.Label.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        .ToList();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JS.InvokeVoidAsync("addKeydownListener", DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    public async Task Open()
+    {
+        isOpen = true;
+        StateHasChanged();
+    }
+
+    private void Close()
+    {
+        isOpen = false;
+        searchTerm = "";
+    }
+
+    private void OnSearch(ChangeEventArgs e)
+    {
+        searchTerm = e.Value?.ToString() ?? "";
+    }
+
+    private record CommandItem(string Label, string Action, string Icon);
+}

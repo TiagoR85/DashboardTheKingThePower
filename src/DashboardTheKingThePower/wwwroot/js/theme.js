@@ -44,3 +44,12 @@ function initAccent() {
     setAccent(accent);
     return accent;
 }
+
+function addKeydownListener(dotNetHelper) {
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            dotNetHelper.invokeMethodAsync('Open');
+        }
+    });
+}
