@@ -20,7 +20,7 @@
     private bool _isMobile;
     private DotNetObjectReference<MainLayout>? _dotNetRef;
 
-    private string ContentClass => $"ml-{(_isMobile || _isCollapsed ? "[72px]" : "[260px]")} transition-all duration-300";
+    private string ContentClass => _isMobile ? "transition-all duration-300" : $"ml-{(_isCollapsed ? "[72px]" : "[260px]")} transition-all duration-300";
 
     protected override async Task OnInitializedAsync()
     {
