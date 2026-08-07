@@ -33,18 +33,18 @@
 @code {
     private List<DonutData> data = new()
     {
-        new("Haircut", 35, "#10b981"),
-        new("Coloring", 25, "#3b82f6"),
-        new("Styling", 20, "#8b5cf6"),
-        new("Treatment", 15, "#f59e0b"),
-        new("Other", 5, "#6b7280")
+        new("Haircut", 35, "var(--chart-1)"),
+        new("Coloring", 25, "var(--chart-2)"),
+        new("Styling", 20, "var(--chart-3)"),
+        new("Treatment", 15, "var(--chart-4)"),
+        new("Other", 5, "var(--chart-5)")
     };
-    
+
     private ApexChartOptions<DonutData> options = new()
     {
         Chart = new Chart { Toolbar = new Toolbar { Show = false } },
-        Colors = new List<string> { "#10b981", "#3b82f6", "#8b5cf6", "#f59e0b", "#6b7280" }
+        Colors = new List<string> { "var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)" }
     };
-    
+
     public record DonutData(string Label, decimal Value, string Color);
 }

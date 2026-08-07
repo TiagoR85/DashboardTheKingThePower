@@ -32,32 +32,32 @@
 
 @code {
     private string activeTab = "monthly";
-    
+
     private List<ChartData> data = new()
     {
         new("Jan", 30), new("Feb", 40), new("Mar", 35),
         new("Apr", 50), new("May", 49), new("Jun", 60),
         new("Jul", 70), new("Aug", 91), new("Sep", 125)
     };
-    
+
     private List<ChartData> lastMonthData = new()
     {
         new("Jan", 20), new("Feb", 30), new("Mar", 25),
         new("Apr", 40), new("May", 39), new("Jun", 50),
         new("Jul", 60), new("Aug", 81), new("Sep", 115)
     };
-    
+
     private ApexChartOptions<ChartData> options = new()
     {
         Chart = new Chart { Toolbar = new Toolbar { Show = false } },
         Stroke = new Stroke { Curve = Curve.Smooth, Width = 2 },
-        Colors = new List<string> { "oklch(0.55 0.19 160)", "oklch(0.556 0 0)" },
+        Colors = new List<string> { "var(--chart-1)", "var(--muted-foreground)" },
         Fill = new Fill { Type = FillType.Gradient }
     };
-    
+
     private void SetTabMonthly() { activeTab = "monthly"; }
     private void SetTabWeekly() { activeTab = "weekly"; }
     private void SetTabDaily() { activeTab = "daily"; }
-    
+
     public record ChartData(string X, decimal Y);
 }
