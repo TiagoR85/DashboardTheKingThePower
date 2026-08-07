@@ -1,3 +1,5 @@
+@using DashboardTheKingThePower.Components.theme
+
 <aside class="fixed left-0 top-0 h-screen w-[260px] bg-[var(--sidebar)] text-[var(--sidebar-foreground)] flex flex-col transition-all duration-300">
     <div class="p-4 border-b border-[var(--sidebar-border)]">
         <div class="flex items-center gap-2">
@@ -22,6 +24,10 @@
             <span>Analytics</span>
         </a>
     </nav>
+    
+    <div class="p-4 border-t border-[var(--sidebar-border)]">
+        <ThemeToggle />
+    </div>
     
     <div class="p-4 border-t border-[var(--sidebar-border)]">
         <div class="flex items-center gap-3">
