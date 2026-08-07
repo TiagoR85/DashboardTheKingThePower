@@ -53,3 +53,21 @@ function addKeydownListener(dotNetHelper) {
         }
     });
 }
+
+function getSidebarCollapsed() {
+    return localStorage.getItem('sidebarCollapsed') === 'true';
+}
+
+function setSidebarCollapsed(collapsed) {
+    localStorage.setItem('sidebarCollapsed', collapsed.toString());
+}
+
+function getIsMobile() {
+    return window.innerWidth < 768;
+}
+
+function addResizeListener(dotNetHelper) {
+    window.addEventListener('resize', () => {
+        dotNetHelper.invokeMethodAsync('OnResize', getIsMobile());
+    });
+}
